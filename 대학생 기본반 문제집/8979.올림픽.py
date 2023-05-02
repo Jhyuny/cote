@@ -6,7 +6,7 @@ country = []
 for i in range(N):
     medal = list(map(int,input().split()))
     country.append(medal)
-country.sort(key = lambda x : (-x[1],-x[2],-x[3])) # 나열 방법 다시 확인할 것
+country.sort(key = lambda x : (-x[1],-x[2],-x[3])) # 나열 방법 다시 확인
 for i in range(N):
     if country[i][0] == K:
         index = i
