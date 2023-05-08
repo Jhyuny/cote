@@ -25,13 +25,13 @@ for _ in range(L):
     for _ in range(int(t)): # t초 동안 움직인다.
         head[0] += dydx[dir_idx][0]
         head[1] += dydx[dir_idx][1]
-        print('head :', head)
-        print('body :',body)
-        if head in list(body)[0:-1]: #몸에 닿는 경우
+        print('현재 head :', head)
+        print('이전 for문 끝난 body :',body)
+        if head in body: #몸에 닿는 경우
             print('body!')
             break
         body.append(head)
-        print('body :',body)
+        print('현재 head append body :',body)
         if head[0] >= N or head[0]<0 or head[1]<0 or head[1] >= N: #벽에 닿는 경우
             print('wall!')
             break
@@ -39,7 +39,7 @@ for _ in range(L):
            tail[0] += dydx[dir_idx][0]
            tail[1] += dydx[dir_idx][1]
            body.popleft()
-        print(body)
+        print('현재:',body)
         if graph[head[0]][head[1]] == 1: # 꼬리는 가만히
             pass
         answer+=1
