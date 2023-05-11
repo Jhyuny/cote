@@ -19,7 +19,8 @@ nx,ny = start
 while 0<=nx<4 or 0<=ny<4:
     for idx,location in enumerate(locations):
         if [x,y] in location:
-            
+            """need to fill out"""
+            pass
     shark[0] = shark[0] + graph[x][y][0] # eating
     shark[1] = graph[x][y][1]
     # move_fish
