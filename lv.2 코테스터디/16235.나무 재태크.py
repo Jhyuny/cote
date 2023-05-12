@@ -14,23 +14,23 @@ input = sys.stdin.readline
 N,M,K = map(int,input().split(' '))
 nutr = [[5]*N for _ in range(N)]
 add_nutr = [list(map(int,input().rstrip().split(' '))) for _ in range(N)]
-graph = [[[]]*N for _ in range(N)] # 그냥 한 행에 대해서 곱해주면 모든 행이 같아지므로 for문으로 독립적으로 생성해줘야함
-print(graph)
+graph = [[[] for _ in range(N)] for _ in range(N)] # 그냥 한 행에 대해서 곱해주면 모든 행이 같아지므로 for문으로 독립적으로 생성해줘야함
+
 for _ in range(M):
     x,y,age = map(int,input().rstrip().split(' '))
-    graph[x][y].append(age)
-    graph[x][y].sort()
+    graph[x-1][y-1].append(age)
+    graph[x-1][y-1].sort()
 
 def year(graph,nutr):
-    dx = [0,0,0,1,1,1,-1,-1,-1]
-    dy = [0,1,-1,0,1,-1,0,1,-1]
+    dx = [0,0,1,1,1,-1,-1,-1]
+    dy = [1,-1,0,1,-1,0,1,-1]
     # spring, summer
     for i in range(N):
         for j in range(N):
             be_nutr = 0
-            for age in graph[i][j][::]:
+            for age in graph[i][j][::]: # 양분 먹기
                 if nutr[i][j]>=age:
-                    nutr[i][j] == nutr[i][j]-age
+                    nutr[i][j] = nutr[i][j] - age
                 else:
                     graph[i][j].remove(age) # 양분 없어서 죽음
                     be_nutr += age//2
@@ -39,14 +39,16 @@ def year(graph,nutr):
     # fall
     for i in range(N):
         for j in range(N):
-            if graph[i][j] and max(graph[i][j]) >= 5:
-                x,y = i,j
-                for k in range(8):
-                    nx = x+dx[k]
-                    ny = y+dy[k]
-                    if 0<=nx<N and 0<=ny<N:
-                        graph[nx][ny].append(1)
-                        graph[nx][ny].sort()
+            if graph[i][j]:
+                for tree in graph[i][j]:
+                    if tree>=5:
+                        x,y = i,j
+                        for k in range(8):
+                            nx = x+dx[k]
+                            ny = y+dy[k]
+                            if 0<=nx<N and 0<=ny<N:
+                                graph[nx][ny].append(1)
+                                graph[nx][ny].sort()
     # winter
     new_nutr = [[0]*N for _ in range(N)]
     for i in range(N):
