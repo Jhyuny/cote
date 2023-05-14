@@ -5,6 +5,7 @@ N, M = map(int,input().split())
 pack = []
 single = []
 prices = []
+
 for _ in range(M):
     a,b = list(map(int,input().split()))
     pack.append(a)
