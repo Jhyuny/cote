@@ -8,10 +8,9 @@ graph = [list(map(int, input().split())) for _ in range(N)]
 q = deque()
 
 
-def bfs(i, j, graph):
+def bfs():
     dx = [-1, 1, 0, 0]
     dy = [0, 0, -1, 1]
-    q.append([i, j])
     while q:
         x, y = q.popleft()
         for i in range(4):
@@ -21,13 +20,13 @@ def bfs(i, j, graph):
                 if graph[nx][ny] == 0:
                     graph[nx][ny] = graph[x][y] + 1
                     q.append([nx, ny])
-    print(graph)
 
 
 for i in range(N):
     for j in range(M):
         if graph[i][j] == 1:
-            bfs(i, j, graph)
+            q.append([i,j]) # 토마토가 존재하는 좌표를 모두 넣고 한 번에 bfs진행
+bfs()
 ans = 0
 for i in graph:
     for j in i:
