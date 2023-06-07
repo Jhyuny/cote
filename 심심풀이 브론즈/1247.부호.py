@@ -1,17 +1,17 @@
 """
 https://www.acmicpc.net/problem/1247
 """
-l = []
+import sys
+
+input = sys.stdin.readline  # sys.stdin.readline 사용 안해서 시간초과
 for _ in range(3):
     N = int(input())
     S = 0
     for _ in range(N):
         S += int(input())
     if S == 0:
-        l.append("0")
+        print("0")
     elif S > 0:
-        l.append("+")
+        print("+")
     else:
-        l.append("-")
-for i in l:
-    print(i)
+        print("-")
