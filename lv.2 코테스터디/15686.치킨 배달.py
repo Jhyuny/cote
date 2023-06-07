@@ -1,29 +1,26 @@
 """
 https://www.acmicpc.net/problem/15686
 """
-from collections import deque
-N = int(input())
-graph = [list(map(int,input().split())) for _ in range(N)]
-print(graph)
+from itertools import combinations
+N,M = list(map(int,input().split()))
+city = [list(map(int, input().split())) for _ in range(N)]
 chicken = []
-q = deque()
+home = []
+ans = 1000000000000
 for i in range(N):
     for j in range(N):
-        if graph[i][j] == 2:
+        if city[i][j] == 2:
             chicken.append([i,j])
-
-def bfs(i,j):
-    visited = [[0]*N for _ in range(N)]
-    l = []
-    dx = [1,-1,0,0]
-    dy = [0,0,1,-1]
-    x,y = i,j
-    for i in range(4):
-        nx = x + dx[i]
-        ny = y + dy[i]
-        if 0<=nx<N and 0<=ny<N:
-            if visited[nx][ny] == 1: # 
-                q.append([nx,ny])
-                visited[nx][ny] = visited[x][y]+1
-            elif graph[nx][ny] == 0:
-                q.append([nx,ny])
+        elif city[i][j] == 1:
+            home.append([i,j])
+print(chicken)
+for group in combinations(chicken,M):
+    city_dir = 0
+    for h in home:
+        dir = 1000000000000
+        for i in range(M):
+            dir = min(dir,abs(h[0]-group[i][0]) + abs(h[1]-group[i][1]))
+        city_dir += dir
+    ans = min(ans,city_dir)
+print(ans)
+    
