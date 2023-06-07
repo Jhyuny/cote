@@ -13,7 +13,6 @@ for i in range(N):
             chicken.append([i,j])
         elif city[i][j] == 1:
             home.append([i,j])
-print(chicken)
 for group in combinations(chicken,M):
     city_dir = 0
     for h in home:
