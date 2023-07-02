@@ -20,7 +20,6 @@ K = changetoidx(K)
 R = changetoidx(R)
 N = int(N)
 for i in range(N):
-    print(K,R)
     move = input()
     nR = R
     if move == 'R':
