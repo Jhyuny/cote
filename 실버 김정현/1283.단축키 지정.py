@@ -2,7 +2,7 @@
 https://www.acmicpc.net/problem/1283
 """
 N = int(input())
-keys = [] # 대문자로 통일
+keys = [] # append시 대문자로 통일
 words = [ input() for _ in range(N) ]
 
 for word in words:
