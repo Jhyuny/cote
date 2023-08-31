@@ -17,7 +17,7 @@ def bfs(start,end):
     q=deque([(start,0)])
     while q:
         now,weight=q.popleft()
-        for idx,i in enumerate(tree[now][1:], start=1): # i=[정점,가중치]
+        for idx,i in enumerate(tree[now][1:], start=1): # i=[정점,가중치] -> 여기서 순서대로 진행하지 않고 가중치가 작은 것부터 탐색 시작
             if idx==end and i!=0:
                 return weight+i
             if visited[idx]==0: # 방문한 적 없다면
