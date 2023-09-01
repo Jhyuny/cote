@@ -1,31 +1,39 @@
 """
 https://www.acmicpc.net/problem/1753
 """
-from collections import deque
+import sys
+import heapq
+
+input=sys.stdin.readline
+INF = int(1e9)
+
+def dijkstra(start):
+    q=[]
+    heapq.heappush(q,(0,start))
+    distance[start]=0
+    while q:
+        weight,now=heapq.heappop(q)
+        if distance[now]<weight:
+            continue
+        for i in tree[now]:
+            cost=weight+i[1]
+            if cost<distance[i[0]]:
+                distance[i[0]]=cost
+                heapq.heappush(q,(cost,i[0]))
+
 V,E=map(int,input().split())
 s=int(input())
-tree=[[0]*(V+1) for _ in range(V+1)]
+tree=[[] for _ in range(V+1)]
+distance = [INF] * (V+1) #최단 거리 테이블
+
 for _ in range(E):
     u,v,w=map(int,input().split())
-    if tree[u][v]!=0 and tree[u][v]<=w:
-        pass
-    else:
-        tree[u][v]=w
-def bfs(start,end):
-    if start==end: return 0
-    visited=[0] * (V+1)
-    q=deque([(start,0)])
-    while q:
-        now,weight=q.popleft()
-        for idx,i in enumerate(tree[now][1:], start=1): # i=[정점,가중치] -> 여기서 순서대로 진행하지 않고 가중치가 작은 것부터 탐색 시작
-            if idx==end and i!=0:
-                return weight+i
-            if visited[idx]==0: # 방문한 적 없다면
-                q.append([idx,weight+i]) # [방문,현재 가중치]
-                visited[idx]=1
-            else:
-                pass
-    return 'INF'
+    tree[u].append((v,w))
+
+dijkstra(s)
 
 for i in range(1,V+1):
-    print(bfs(s,i))
+    if distance[i]==INF:
+        print("INF")
+    else:
+        print(distance[i])
