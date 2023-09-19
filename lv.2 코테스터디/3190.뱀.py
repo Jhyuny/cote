@@ -22,27 +22,29 @@ answer = 0
 L = int(input())
 for _ in range(L):
     t,dir = input().split()
+    nx,ny = head
     for _ in range(int(t)): # t초 동안 움직인다.
-        head[0] += dydx[dir_idx][0]
-        head[1] += dydx[dir_idx][1]
+        nx += dydx[dir_idx][0]
+        ny += dydx[dir_idx][1]
         print('현재 head :', head)
         print('이전 for문 끝난 body :',body)
-        if head in body: #몸에 닿는 경우
+        if [nx,ny] in body: #몸에 닿는 경우
             print('body!')
             break
-        body.append(head)
+        body.append([nx,ny])
         print('현재 head append body :',body)
-        if head[0] >= N or head[0]<0 or head[1]<0 or head[1] >= N: #벽에 닿는 경우
+        if nx>=N or nx<0 or ny<0 or ny>=N: #벽에 닿는 경우
             print('wall!')
             break
-        if graph[head[0]][head[1]] == 0: # 꼬리도 전진
+        if graph[nx][ny] == 0: # 꼬리도 전진
            tail[0] += dydx[dir_idx][0]
            tail[1] += dydx[dir_idx][1]
            body.popleft()
         print('현재:',body)
-        if graph[head[0]][head[1]] == 1: # 꼬리는 가만히
+        if graph[nx][ny] == 1: # 꼬리는 가만히
             pass
         answer+=1
+        head = [nx,ny]
     if dir == 'L': # 이동 끝나면 방향 틀기
         dir_idx += 1
         if dir_idx >= 4:
@@ -51,4 +53,4 @@ for _ in range(L):
         dir_idx -= 1
         if dir_idx < 0:
             dir_idx = dir_idx+4
-print('end',answer)
+    print('end',answer)
