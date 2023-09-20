@@ -1,25 +1,14 @@
 """
 https://www.acmicpc.net/problem/1107
 """
-# test_case 7번 해결
-channel = 100
-N = input()
-M = int(input())
-if M != 0:
-    broken = set(map(int, input().split()))
-else:
-    broken = set([])
-nums = set([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
-buttons = list(nums - broken)
-ans = []
-
-for num in N:
-    if int(num) in buttons:
-        ans.append(0)
-    else:
-        ans.append(min(map(lambda x: abs(x - int(num)), buttons)))
-
-answer = 0
-for idx, i in enumerate(ans):
-    answer += i * 10 ** (len(ans) - idx - 1)
-print(min(answer + len(N), abs(int(N) - channel)))
+N=int(input())
+M=int(input())
+broken=input().split()
+answer=abs(100-N) # 현재 채널 100에서 그냥 옮길 때 누르는 횟수
+for num in range(1000001): # 이동하려는 채널과는 별개로 채널은 무한히 존재한다
+    for idx,i in enumerate(str(num)):
+        if i in broken:
+            break
+        elif idx==len(str(num))-1: # num이 누를 수 있는 번호일 경우
+            answer=min(answer,abs(N-num)+len(str(num)))
+print(answer)
