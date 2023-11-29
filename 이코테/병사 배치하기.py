@@ -16,7 +16,6 @@ for i in range(1,N):
     a = power[i]
 print(dp)
 print(ans)
-
 # 8
 # 15 11 4 13 8 7 9 8
 # ans = 4
