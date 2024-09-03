@@ -1,6 +1,7 @@
 """
 https://www.acmicpc.net/problem/10844
 """
+
 N = int(input())
 
 dp = [[0]*10 for _ in range(N+1)]
