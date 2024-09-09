@@ -13,13 +13,14 @@ for i in range(1,N+1):
     for j in range(now, now+5):
         if j>=len(dp):
             break
-        dp[j] = True
+        dp[j-1] = True
 
 ans = False
-for i in range(D, total, D):
+
+for i in range(D-1, total, D):
     if dp[i]:
         ans = True
-        print(i)
+        print(i+1)
         break
 
 if ans == False:
